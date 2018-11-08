@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>看点资讯</title>
+	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="css/bootstrap-3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrapSwitch/css/bootstrap3/bootstrap-switch.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/iconFont/iconfont.css">
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/highcharts.js"></script>
+	<script src="css/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<script src="css/bootstrapSwitch/js/bootstrap-switch.min.js"></script>
+	<script src="js/config.js"></script>
+	
+	<script>
+		$(function(){
+			$('.leftDiv').height($(window).height());
+			$('.rightDiv').height($(window).height());
+			$('.contentRight').height($(window).height()-50-20);
+			$('.contentLeft li:first').trigger('click');
+		});
+	</script>
+</head>
+<body>
+    <div style="width:1240px; margin:0 auto" >
+	<div class="leftDiv">
+		<div class="topLeft">
+			<img src="images/logo.png" alt="" width="40" height="40" style="margin:0 20px">
+			看点资讯
+		</div>
+		<div class="contentLeft">
+			<ul class="list-unstyled">
+				<li><i class="iconfont icon-shouye"></i><span>首页</span><i class="iconfont icon-kuozhan"></i></li>
+				<li><i class="iconfont icon-liebiao"></i><span>栏目管理</span><i class="iconfont icon-kuozhan"></i></li>
+				<li><i class="iconfont icon-zixun"></i><span>资讯管理</span><i class="iconfont icon-kuozhan"></i></li>
+				<li><i class="iconfont icon-ai-user"></i><span>用户管理</span><i class="iconfont icon-kuozhan"></i></li>
+			</ul>
+		</div>
+	</div>
+	<div class="rightDiv">
+		<div class="topRight">
+			<div class="noticeDiv">
+				<i class="iconfont icon-liebiao1"></i>
+				<i class="iconfont icon-laba"></i>
+				<span class="noticeNum">4</span>
+			</div>
+			<div class="infoDiv">
+				<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514093920321&di=913e88c23f382933ef430024afd9128a&imgtype=0&src=http%3A%2F%2Fp.3761.com%2Fpic%2F9771429316733.jpg" alt="" style="width: 40px;height: 40px;border-radius: 50%;">
+				<span>乔峰</span>
+				<i class="iconfont icon-kuozhan"></i>
+			</div>
+		</div>
+		<div class="contentRight">
+                <div id="home">
+                        <div class="outerDiv">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="totalDiv bg-white">
+                                        <div class="iconDiv bg-green">
+                                            <i class="iconfont icon-yun"></i>
+                                        </div>
+                                        <div class="numDiv">
+                                            <span>99.9%</span>
+                                            <small>SERVER UPTIME</small>
+                                        </div>
+                                    </div>
+                                    <div class="totalDiv bg-white">
+                                        <div class="iconDiv bg-green">
+                                            <i class="iconfont icon-yun"></i>
+                                        </div>
+                                        <div class="numDiv">
+                                            <span>87%</span>
+                                            <small>SERVER UPTIME</small>
+                                        </div>
+                                    </div>
+                                    <div class="totalDiv bg-white">
+                                        <div class="iconDiv bg-green">
+                                            <i class="iconfont icon-yun"></i>
+                                        </div>
+                                        <div class="numDiv">
+                                            <span>29.7%</span>
+                                            <small>SERVER UPTIME</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="visDiv">
+                                        <div id="visContainer"></div>
+                                        <div class="numDiv">
+                                            <span>14.85%</span>
+                                            <small>More Visitors</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="uptimeDiv">
+                                        <div id="uptimeContainer"></div>
+                                        <div class="numDiv">
+                                            <span>47.85%</span>
+                                            <small>More Visitors</small>
+                                        </div>
+                                    </div>
+                                    <div class="salesDiv">
+                                        <div id="salesContainer"></div>
+                                        <div class="numDiv">
+                                            <span>28.85%</span>
+                                            <small>More Visitors</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+		</div>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('.contentLeft ul').on({
+            click:function(){
+                if($(this).text()=="栏目管理"){
+                    $('.contentRight').load('kd_lm.html');
+                    return;
+                }
+                if($(this).text()=="资讯管理"){
+                    $('.contentRight').load('kd_zx.html');
+                    return;
+                }
+                if($(this).text()=="用户管理"){
+                    $('.contentRight').load('kd_yh.html');
+                }
+                if($(this).text()=="首页"){
+                    $('body').load('kd_sy.html');
+                }
+            }
+        },'li');
+        drawVis();
+        drawUptime();
+        drawSales();
+        function drawVis(){
+            var chart = Highcharts.chart('visContainer', {
+				chart:{
+					margin:[0,0,0,0],
+				},
+				credits:{
+					enabled:false,
+				},
+				colors:['#66bb0d','#cccccc'],
+				title: {
+					text: ''
+				},
+				xAxis: {
+					visible:false,
+				},
+				yAxis: {
+					visible:false,
+					title: {
+						text: ''
+					}
+				},
+				legend: {
+					floating:true,
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'top'
+				},
+				plotOptions: {
+					series: {
+						label: {
+							connectorAllowed: false
+						},
+						pointStart: 2010
+					}
+				},
+				series: [{
+					name: 'Page',
+					data: [43934, 5203, 5777, 9658, 7031, 19931, 17133, 54175,2916, 4064, 9742, 2851, 3490, 30282, 38121, 40434]
+				}, {
+					name: 'Visitors',
+					data: [24916, 240, 2974, 2981, 3290, 3082, 3121, 4034,4334, 5203, 5717, 6968, 9731, 19931, 137133, 154175]
+				}]
+			});
+        };//drawVis函数
+        function drawUptime(){
+            var chart = Highcharts.chart('uptimeContainer', {
+				chart:{
+					margin:[0,0,0,0],
+				},
+				credits:{
+					enabled:false,
+				},
+				colors:['#862eb7'],
+				title: {
+					text: ''
+				},
+				xAxis: {
+					visible:false,
+				},
+				yAxis: {
+					visible:false,
+				},
+				series: [{
+					type: 'column',
+					colorByPoint: true,
+					data: [29.9, 71.5, 106.4, 1.2, 14.0, 17.0, 13.6, 14.5, 26.4, 14.1, 95.6, 4.4,148.5, 216.4, 194.1, 95.6, 54.4],
+					showInLegend: false
+				}]
+			});
+
+        };//darwUptime函数
+        function drawSales(){
+            var chart=Highcharts.chart('salesContainer',{
+                credits:{
+					enabled:false,
+				},
+				chart: {
+					margin : [0, 0 , 0, 100]
+				},
+				title: {
+					floating:true,
+					text: ''
+				},
+				tooltip: {
+					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: false,
+						},
+					}
+				},
+				series: [{
+					type: 'pie',
+					innerSize: '60%',
+					name: 'Sales',
+					data: [
+						['Firefox',45.0],
+						['IE',26.8],
+						['Chrome',12.8],
+						['Safari',8.5],
+						['Opera',6.2],
+						['其他',0.7]
+					]
+				}]
+            })
+
+        };//drawsales函数
+    });
+</script>
+<style>
+        .bg-white{
+            background-color: white;
+        }
+        .bg-green{
+            background-color:#66bb0d;
+        }
+        .outerDiv{
+            width: 95%;
+            margin:0 auto;
+        }
+        .totalDiv{
+            overflow:hidden;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top:10px;
+        }
+        .totalDiv .iconDiv,.totalDiv .numDiv{
+            float:left; 
+        }
+        .iconDiv{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+        }
+        .iconDiv i{
+            line-height: 50px;
+            color:white;
+            font-size: 20px;
+        }
+        .totalDiv .numDiv{
+            margin-left: 20px;
+            padding-top:5px;
+        }
+        .numDiv span{
+            font-size: 20px;
+            line-height: 24px;
+        }
+        .numDiv small{
+            display: block;
+        }
+        #visContainer{
+            height: 230px;
+            margin-top: 10px;
+        }
+        .visDiv,.uptimeDiv,.salesDiv{
+            position: relative;
+        }
+        .visDiv .numDiv,.uptimeDiv .numDiv,.salesDiv .numDiv{
+            position: absolute;
+            top:20px;
+            left: 20px;
+        }
+        .visDiv span{
+            color:#66bb0d;
+            
+        }
+        .uptimeDiv,.salesDiv{
+            margin-top: 10px;
+        }
+        #uptimeContainer,#salesContainer{
+            height: 110px;
+        }
+    </style>
+</body>
+</html>
